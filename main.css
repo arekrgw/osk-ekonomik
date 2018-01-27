@@ -1,0 +1,424 @@
+body{
+  position: relative;
+  font-family: Ubuntu;
+}
+@font-face { font-family: Ubuntu; src: url('webfonts/Ubuntu-Regular.ttf');}
+@font-face { font-family: Roboto; src: url('webfonts/Roboto-Regular.ttf');}
+@font-face { font-family: Klavika; src: url('webfonts/Klavika Regular Plain.otf');}
+@font-face { font-family: Oswald; src: url('webfonts/Oswald-Regular.ttf');}
+@font-face { font-family: Palanquin; src: url('webfonts/palanquin-regular.ttf');}
+
+
+a:focus
+{
+	text-decoration: none;
+}
+a:hover
+{
+	text-decoration: none;
+}
+a
+{
+	text-decoration: none;
+}
+.wrapper{
+  padding:0 !important;
+  margin:0 !important;
+}
+/* NAVBAR */
+.bg-dark{
+  background-color: #161f28 !important
+}
+.navbar-brand {
+  padding: 10px 2px 10px 0;
+}
+.navbar-brand img {
+  max-height: 30px;
+}
+@media (max-width: 768px){
+  #mainNav {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+.calendar{
+  font-weight: bold;
+  text-decoration: underline;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+@media (max-width: 992px){
+  .calendar{
+    border: none;
+  }
+  .nav-item{
+    text-align: center;
+  }
+}
+
+/* END NAVBAR */
+/* LANDING */
+
+.landing-page{
+  background: url('imgs/landing-background1.png');
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+
+.top-bar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 17px;
+  font-weight: bold;
+  color:white;
+  text-align: center;
+  text-shadow: 0px 0px 12px #333;
+  padding: 10px;
+  border-bottom: 1px solid white;
+  margin: 0 15px 0 15px;
+}
+.main-landing{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.main-landing img{
+  margin-top: 150px;
+}
+.main-landing a{
+  color: white;
+	font-size: 70px;
+  transition: all 0.7s ease;
+  cursor: pointer;
+  animation: button_land 1s infinite ease-in-out;
+}
+.main-landing a:hover{
+  color: #3493f3;
+}
+.main-landing a:focus{
+	outline: none;
+}
+@keyframes button_land{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.2);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+/* END LANDING */
+/* O NAS */
+.about{
+  margin-top: 50px;
+}
+.about h2{
+  font-family: Oswald;
+  font-size: 50px;
+  color: #161f28;
+  margin-bottom: 50px;
+  width: 100%;
+}
+.about-description{
+  max-width: 700px;
+  font-size: 28px;
+  text-align: center;
+  color:rgba(0, 0, 0, 0.7);
+  padding: 0 15px;
+}
+@media (max-width: 768px){
+  .about-description{
+    font-size: 24px;
+
+  }
+}
+.marked
+{
+  color:#3c5670;
+  font-weight: bold;
+}
+/* END ONAS */
+/* OFERTA */
+.oferta{
+  margin-top: 100px;
+}
+
+.oferta h2
+{
+  font-family: Oswald;
+  font-size: 50px;
+  color: #161f28;
+  margin-bottom: 50px;
+  width: 100%;
+}
+.offering
+{
+  text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  font-family: 'Exo', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 0;
+  height: 200px;
+  cursor: pointer;
+  transition: all .4s ease-in-out;
+	z-index: 3;
+}
+.offering:hover{
+  transform: scale(1.2);
+  box-shadow: 2px 2px 4px #444, -2px 2px 4px #444, -2px -2px 4px #444, 2px -2px 4px #444;
+	z-index: 7;
+}
+@media (max-width: 992px){
+  .offering:hover{
+    transform: scale(1.05);
+  }
+}
+.one
+{
+  background-image: url('imgs/oferta/katam.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.two
+{
+  background-image: url('imgs/oferta/kata1.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.three
+{
+  background-image: url('imgs/oferta/kata2.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+@media (max-width: 992px){
+  .three{
+    font-size: 22px;
+  }
+
+}
+@media (max-width: 576px){
+  .three{
+    font-size: 26px;
+  }
+  .padoff
+  {
+    padding:0 15px;
+  }
+}
+.four
+{
+  background-image: url('imgs/oferta/katb.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.five
+{
+  background-image: url('imgs/oferta/katbe.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.six
+{
+  background-image: url('imgs/oferta/katc.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.seven
+{
+  background-image: url('imgs/oferta/katce.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.eight
+{
+  background-image: url('imgs/oferta/katd.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.nine
+{
+  background-image: url('imgs/oferta/katt.jpg') ;
+  background-position: center;
+  background-size: cover;
+}
+.small
+{
+  font-size:18px;
+  text-decoration: underline;
+}
+.bonus
+{
+  width: 100%;
+  font-family: Oswald;
+  font-size: 26px;
+}
+/* END OFERTA */
+/* GALERIA */
+.gallery{
+  margin-top: 100px;
+  background: url('imgs/galeriabg.png') center center fixed;
+}
+.gallery .container{
+  padding: 0 !important;
+}
+/* FAQ */
+.faq{
+  font-size: 24px;
+  margin-top: 100px
+}
+.faq h2{
+  font-family: Oswald;
+  font-size: 50px;
+  color: #161f28;
+  margin-bottom: 50px;
+  width: 100%;
+}
+.question{
+  font-weight: bold;
+  color: #3493f3;
+}
+.answer{
+  font-size: 20px;
+  margin-left: 5px;
+}
+.hr-faq{
+  border: 1px solid #eee;
+}
+/* END FAQ */
+/* KONTAKT */
+.contact{
+  margin-top: 100px;
+}
+.contact h2{
+  font-family: Oswald;
+  font-size: 50px;
+  color: #161f28;
+  margin-bottom: 50px;
+  width: 100%;
+}
+#map_wrapper {
+  height: 450px;
+  -webkit-box-shadow: 0px 0px 20px 0px #999;
+  -moz-box-shadow: 0px 0px 20px 0px #999;
+  box-shadow: 0px 0px 20px 0px #999;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+.dane
+{
+  list-style-type:none;
+  padding: 0;
+  color:rgba(0, 0, 0, 0.7);
+}
+.dane li{
+  font-size: 28px;
+  padding: 5px 0;
+}
+.dane li i{
+  margin-right: 8px;
+  color: #3493f3;
+}
+@media (max-width: 992px){
+  .dane li{
+    text-align: center;
+    font-size: 22px;
+  }
+}
+/* END KONTAKT */
+/* STOPKA */
+.footer{
+  margin-top: 100px;
+  background: url('imgs/galeriabg.png');
+
+}
+.fblink{
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  padding: 25px 0;
+  color: #fff !important;
+  transition: all 0.6s ease;
+  box-sizing: border-box;
+}
+.fblink:hover{
+  background-color: #3B5998;
+}
+.fbfont{
+  font-family: Klavika;
+  font-weight: bold;
+}
+.foot_nav
+{
+	list-style-type: none;
+  padding: 0;
+
+}
+.foot_nav > li> a
+{
+	color: rgba(255,255,255,0.5);
+	transition: all 0.3s ease;
+	font-family: Roboto;
+  text-transform: uppercase;
+}
+.foot_nav > li> a:hover
+{
+	color: white;
+	border-bottom: 1px solid white;
+}
+.design
+{
+	color: rgba(255,255,255,0.5);
+	font-family: Roboto;
+	text-align: right;
+}
+
+@media (max-width: 768px){
+  .design{
+    text-align: center;
+  }
+  .foot_nav li{
+    text-align: center;
+  }
+}
+.footer-padding{
+  padding: 50px 0;
+}
+/* END FOOTER */
+/* CALENDAR */
+.cal
+{
+  margin-top: 100px;
+  font-family: Oswald;
+  min-height: calc(100vh - 100px);
+}
+.cal h2{
+  margin-bottom: 20px;
+}
+.calendar_
+{
+  display: flex;
+  justify-content: center;
+	padding-bottom: 50px;
+}
+.calendar_ iframe{
+	max-height: 100vh;
+  box-shadow: 0 0 10px #aaa;
+}
+/* END CALENDAR */
