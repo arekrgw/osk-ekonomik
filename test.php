@@ -1,4 +1,31 @@
+<?php 
+  $con = new PDO("mysql:host=sql.ekonomik.nazwa.pl;dbname=ekonomik", "ekonomik_android", "Ekonomik7A");
 
+  $query = "SELECT date, timek from struktura Where type=:type";
+  $stmt = $con->prepare($query);
+  $stmt->execute(array("type" => "datakursu"));
+
+  $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
+  $daysOfWeek = array("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela");
+  $timeinint = strtotime($stmt['date']);
+  $exp = explode(":",$stmt['timek']);
+  $fullTime = strtotime("+".$exp[0]." hour +".$exp[1]." minutes", $timeinint);
+
+    $current = time();
+    if($current < $fullTime){
+      $date = str_replace("-", ".", $stmt['date']);
+      $dayOfWeek = $daysOfWeek[date("N", $timeinint)-1];
+      $time = $stmt['timek'];
+      $outString = "Najbliższy termin rozpoczęcia kursu na prawo jazdy: $date r. ($dayOfWeek) o godz. $time. w LO im. B.Prusa sala nr 3";
+    }
+    else{
+      $outString = "Kolejny kurs już niebawem!";
+    }
+  $con = null;
+
+?>
 <!DOCTYPE html>
 <html lang="pl">
   <head>
@@ -81,7 +108,7 @@
   <!-- LANDING -->
       <div id="start" class="landing-page">
 
-        <div class="top-bar"></div>
+        <div class="top-bar"><?php echo $outString; ?></div>
 
         <div class="main-landing">
           <img src="imgs/brandlogo.png" class="img-fluid" alt="OSK Ekonomik">

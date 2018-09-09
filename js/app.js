@@ -38,8 +38,8 @@ $(function() {
 $('.loader').delay(750).fadeOut();
 
 
-var get = document.querySelector(".top-bar");
-get.innerHTML = "Najbliższy termin rozpoczęcia kursu na prawo jazdy: " + date.data + " ("+date.dzienTyg+") o godz. "+date.godzina+".  w LO im. B.Prusa sala nr "+date.sala;
+// var get = document.querySelector(".top-bar");
+// get.innerHTML = "Najbliższy termin rozpoczęcia kursu na prawo jazdy: " + date.data + " ("+date.dzienTyg+") o godz. "+date.godzina+".  w LO im. B.Prusa sala nr "+date.sala;
 
 function initMap() {
 

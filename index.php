@@ -1,4 +1,31 @@
+<?php 
+  $con = new PDO("mysql:host=sql.ekonomik.nazwa.pl;dbname=ekonomik", "ekonomik_android", "Ekonomik7A");
 
+  $query = "SELECT date, timek from struktura Where type=:type";
+  $stmt = $con->prepare($query);
+  $stmt->execute(array("type" => "datakursu"));
+
+  $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
+  $daysOfWeek = array("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela");
+  $timeinint = strtotime($stmt['date']);
+  $exp = explode(":",$stmt['timek']);
+  $fullTime = strtotime("+".$exp[0]." hour +".$exp[1]." minutes", $timeinint);
+
+    $current = time();
+    if($current < $fullTime){
+      $date = str_replace("-", ".", $stmt['date']);
+      $dayOfWeek = $daysOfWeek[date("N", $timeinint)-1];
+      $time = $stmt['timek'];
+      $outString = "Najbliższy termin rozpoczęcia kursu na prawo jazdy: $date r. ($dayOfWeek) o godz. $time. w LO im. B.Prusa sala nr 3";
+    }
+    else{
+      $outString = "Kolejny kurs już niebawem!";
+    }
+  $con = null;
+
+?>
 <!DOCTYPE html>
 <html lang="pl">
   <head>
@@ -39,11 +66,14 @@
   </head>
   <body data-spy="scroll" data-target="#mainNav" data-offset="100">
 
-    <div class="container-fluid wrapper">
+    <main class="container-fluid wrapper">
     <!-- NAVBAR -->
       <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
-        <a class="navbar-brand" href="#start"><img class="img-fluid" src="imgs/brand-logo-small.png"></a>
+        <a class="navbar-brand" href="#start">
+          <img class="img-fluid" src="imgs/brand-logo-small.png">
+          <span class="sr-only">OSK Ekonomik</span>
+        </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 
@@ -79,21 +109,21 @@
       </nav>
   <!-- END NAVBAR -->
   <!-- LANDING -->
-      <div id="start" class="landing-page">
+      <header id="start" class="landing-page">
 
-        <div class="top-bar"></div>
+        <div class="top-bar"><?php echo $outString; ?></div>
 
         <div class="main-landing">
           <img src="imgs/brandlogo.png" class="img-fluid" alt="OSK Ekonomik">
-
+          <span class="sr-only">OSK Ekonomik</span>
           <a href="#about">
             <i class="fas fa-chevron-down"></i>
           </a>
         </div>
-        </div>
+      </header>
   <!-- END LANDING -->
   <!-- ONAS -->
-        <div id="about" class="container about">
+        <section id="about" class="container about">
           <div class="row"><h2 class="text-center">O NAS</h2></div>
           <div class="row">
             <div class="about-description mx-auto">
@@ -101,10 +131,10 @@
               </p>
             </div>
           </div>
-        </div>
+        </section>
 <!-- END ONAS -->
 <!--OFERTA -->
-        <div id="oferta" class="container oferta">
+        <section id="oferta" class="container oferta">
           <div class="row"><h2 class="text-center">ZAPISZ SIĘ!</h2></div>
 
           <div class="row padoff">
@@ -148,22 +178,50 @@
 
           </div>
 
-        </div>
+        </section>
     <!-- END OFERTA -->
     <!-- GALERIA -->
-        <div id="gallery" class="gallery padoff">
+        <section id="gallery" class="gallery padoff">
           <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block w-100" src="imgs/gallery/dom.png" alt="Budynek Ośrodka">
+                  <img class="d-block w-100" src="imgs/gallery/house.jpg" alt="Dom">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100" src="imgs/gallery/gladius.png" alt="Gladius">
+                  <img class="d-block w-100" src="imgs/gallery/cars2.jpg" alt="Auta Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/cars1.jpg" alt="Auta Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/cars3.jpg" alt="Auta Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/truck.jpg" alt="Ciezarowka Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/cars4.jpg" alt="Ciezarowka Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/bike1.png" alt="Motocykl Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/bike2.png" alt="Motocykl Nauki Jazdy">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="imgs/gallery/bike3.png" alt="Motocykl Nauki Jazdy">
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -176,13 +234,13 @@
               </a>
             </div>
           </div>
-        </div>
+        </section>
     <!-- END GALERIA -->
     <!-- FAQ -->
-        <div id="faq" class="container faq">
+        <section id="faq" class="container faq">
           <div class="row"><h2 class="text-center">Często zadawane pytania</h2></div>
           <div class="row padoff">
-            <div class="col-xs-12">
+            <div class="col-xs-12 qa">
 
               <p class="question">Kiedy mogę się zapisać na kurs?</p>
               <p class="answer">- Na kurs można zapisywać się 3 miesiące przed ukończeniem 18 roku życia.</p>
@@ -206,9 +264,9 @@
 
             </div>
           </div>
-        </div>
+        </section>
     <!-- KONTAKT -->
-        <div id="contact" class="container contact padoff">
+        <section id="contact" class="container contact padoff">
           <div class="row"><h2 class="text-center">Nadal masz pytanie?</h2></div>
           <div class="row">
             <div class="col-lg-6 col-md-12">
@@ -227,13 +285,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
     <!-- END KONTAKT -->
     <!-- STOPKA -->
-        <div class="container-fluid footer">
+        <footer class="container-fluid footer">
 
           <div class="row">
-            <a href="https://www.facebook.com/OSK-Ekonomik-175956562597919/?fref=ts" class="fblink" target="_blank">Odwiedź nas na <span class="fbfont">facebook'u</span></a>
+            <a href="https://www.facebook.com/OSK-Ekonomik-175956562597919/?fref=ts" class="fblink" target="_blank">Odwiedź nas na <span class="fbfont">facebook'u</span>
+            </a>
           </div>
 
           <div class="container footer-padding">
@@ -250,13 +309,12 @@
               </div>
             </div>
           </div>
-        </div>
+        </footer>
 
-    </div><!-- END MAIN WRAPPER -->
+    </main><!-- END MAIN WRAPPER -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="datarozpoczeciakursu.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxlvQ9tIGRFWobOqQ7RzW2gWaDzQixi8&callback=initMap">
     </script>
     <script src="js/app.min.js"></script>
