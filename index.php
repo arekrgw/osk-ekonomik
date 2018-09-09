@@ -277,6 +277,7 @@
                 <li><i class="fas fa-phone"></i>Paweł Bełc: tel. 601 338 873</li>
                 <li><i class="fas fa-at"></i>osk-ekonomik@gmail.com</li>
                 <li><i class="fas fa-at"></i>belcpawel@gmail.com</li>
+                <li><i class="fas fa-credit-card"></i>02 1050 1924 1000 0092 2478 1279</li>
               </ul>
             </div>
             <div class="col-lg-6 col-md-12">
