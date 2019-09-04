@@ -1,11 +1,10 @@
 <?php 
-  $con = new PDO("mysql:host=sql.ekonomik.nazwa.pl;dbname=ekonomik", "ekonomik_android", "Ekonomik7A");
+
+  require("api/database.php");
 
   $query = "SELECT date, timek from struktura Where type=:type";
-  $stmt = $con->prepare($query);
-  $stmt->execute(array("type" => "datakursu"));
 
-  $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
+  $stmt = Db::fetch($query, array("type" => "datakursu"))->fetch(PDO::FETCH_ASSOC);
 
     
   $daysOfWeek = array("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela");
@@ -30,7 +29,7 @@
 <html lang="pl">
   <head>
     <meta name="description" content="Ośrodek Szkolenia Kierowców Ekonomik w Skierniewicach">
-    <meta name="keywords" content="Ośrodek szkolenia kierowców, OSK, Ekonomik, Paweł Bełc, Skierniewice, Nauka Jazdy, Najlepsza Szkoła w Skierniewicach, Szkoła Jazdy, OSK ekonomik">
+    <meta name="keywords" content="Ośrodek szkolenia kierowców OSK Ekonomik Paweł Bełc Skierniewice Nauka Jazdy Najlepsza Szkoła w Skierniewicach Szkoła Jazdy OSK ekonomik">
     <meta name="author" content="Arkadiusz Pawlak">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -139,35 +138,35 @@
 
           <div class="row padoff">
             <div class="col-md-4 col-sm-6 offering four">
-              <div class="innerd">Kat. B<br>1200zł/30h</div>
+              <div class="innerd">Kat. B<br>1400zł/30h</div>
             </div>
 
             <div class="col-md-4 col-sm-6 offering one">
               <div class="innerd">Kat. AM<br>400zł/5h</div>
             </div>
 
-            <div class="col-md-4 col-sm-6 offering three">
-              <div class="innerd">Kat. A 1200zł/20h<br>Kat. A1 1000zł/20h<br>Kat. A2 1200zł/20h</div>
+            <div class="col-md-4 col-sm-6 offering one">
+              <div class="innerd">Kat. A1 1000zł/20h<br>Kat. A2 1300zł/20h</div>
             </div>
 
-            <div class="col-md-4 col-sm-6 offering five">
-              <div class="innerd">Kat. B+E<br>800zł/15h</div>
+            <div class="col-md-4 col-sm-6 offering three">
+              <div class="innerd">Kat. A<br>1300zł/20h</div>
             </div>
 
             <div class="col-md-4 col-sm-6 offering six">
-              <div class="innerd">Kat. C<br>2000zł/30h</div>
+              <div class="innerd">Kat. C<br>2200zł/30h</div>
             </div>
 
             <div class="col-md-4 col-sm-6 offering seven">
-              <div class="innerd">Kat. C+E<br>1800zł/25h</div>
+              <div class="innerd">Kat. C+E<br>2000zł/25h</div>
             </div>
 
             <div class="col-md-4 col-sm-6 offering seven">
-              <div class="innerd">Kat. C+C+E<br>3200zł/45h</div>
+              <div class="innerd">Kat. C/C+E<br>3400zł/45h</div>
             </div>
 
             <div class="col-md-4 col-sm-6 offering eight">
-              <div class="innerd">Kat. D<br><span class="small">z kat.B </span>3800zł/60h<br><span class="small">z kat.C </span>3000zł/40h</div>
+              <div class="innerd">Kat. D<br><span class="small">z kat.B </span>4200zł/60h<br><span class="small">z kat.C </span>3400zł/40h</div>
             </div>
 
             <div class="col-md-4 col-sm-12 col-xs-12 offering nine">
