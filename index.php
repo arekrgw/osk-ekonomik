@@ -2,27 +2,27 @@
 
   require("api/database.php");
 
-  $query = "SELECT date, timek from struktura Where type=:type";
+  $query = "SELECT * from data_kursu Where id_kurs=:id";
 
-  $stmt = Db::fetch($query, array("type" => "datakursu"))->fetch(PDO::FETCH_ASSOC);
+  $stmt = Db::fetch($query, array("id" => 1))->fetch(PDO::FETCH_ASSOC);
 
     
   $daysOfWeek = array("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela");
-  $timeinint = strtotime($stmt['date']);
-  $exp = explode(":",$stmt['timek']);
+  $timeinint = strtotime($stmt['data_kursu']);
+  $exp = explode(":",$stmt['godzina_kursu']);
   $fullTime = strtotime("+".$exp[0]." hour +".$exp[1]." minutes", $timeinint);
 
     $current = time();
     if($current < $fullTime){
-      $date = str_replace("-", ".", $stmt['date']);
+      $date = str_replace("-", ".", $stmt['data_kursu']);
       $dayOfWeek = $daysOfWeek[date("N", $timeinint)-1];
-      $time = $stmt['timek'];
-      $outString = "Najbliższy termin rozpoczęcia kursu na prawo jazdy: $date r. ($dayOfWeek) o godz. $time. w LO im. B.Prusa sala nr 3";
+      $time = $stmt['godzina_kursu'];
+      $outString = "Najbliższy termin rozpoczęcia kursu na prawo jazdy: $date r. ($dayOfWeek) o godz. $time. w ".$stmt['miejsce_kursu'];
     }
     else{
       $outString = "Kolejny kurs już niebawem!";
     }
-  $con = null;
+
 
 ?>
 <!DOCTYPE html>
@@ -137,41 +137,60 @@
           <div class="row"><h2 class="text-center">ZAPISZ SIĘ!</h2></div>
 
           <div class="row padoff">
-            <div class="col-md-4 col-sm-6 offering four">
-              <div class="innerd">Kat. B<br>1400zł/30h</div>
-            </div>
 
-            <div class="col-md-4 col-sm-6 offering one">
-              <div class="innerd">Kat. AM<br>400zł/5h</div>
-            </div>
+          <?php 
+          $prices = Db::fetch("SELECT * FROM ceny_kursow")->fetchAll(PDO::FETCH_ASSOC);
 
-            <div class="col-md-4 col-sm-6 offering one">
-              <div class="innerd">Kat. A1 1000zł/20h<br>Kat. A2 1300zł/20h</div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 offering three">
-              <div class="innerd">Kat. A<br>1300zł/20h</div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 offering six">
-              <div class="innerd">Kat. C<br>2200zł/30h</div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 offering seven">
-              <div class="innerd">Kat. C+E<br>2000zł/25h</div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 offering seven">
-              <div class="innerd">Kat. C/C+E<br>3400zł/45h</div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 offering eight">
-              <div class="innerd">Kat. D<br><span class="small">z kat.B </span>4200zł/60h<br><span class="small">z kat.C </span>3400zł/40h</div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 offering nine">
-              <div class="innerd">Kat. T<br>1100zł/20h</div>
-            </div>
+          foreach($prices as $price) {
+            $slug = $price['slug'];
+            $cena = $price['cena'];
+            $hours = $price['ilosc_godz'];
+            $nazwa = $price['nazwa'];
+            if($slug == "db") {
+              echo <<<EOL
+              <div class="col-md-4 col-sm-6 offering $slug">
+              <div class="innerd">Kat. D<br><span class="small">z kat.B </span>$cena zł/$hours h<br>
+              EOL;
+            }
+            else if($slug == "dc") {
+              echo <<<EOL
+                <span class="small">z kat.C </span>$cena zł/$hours h</div>
+                </div>
+              EOL;
+            }
+            else if($slug == "a1") {
+              echo <<<EOL
+              <div class="col-md-4 col-sm-6 offering $slug">
+                <div class="innerd">Kat. A1 $cena zł/$hours h<br>
+              EOL;
+            }
+            else if($slug == "a2") {
+              echo <<<EOL
+                Kat. A2 $cena zł/$hours h</div>
+                </div> 
+              EOL;
+            }
+            else if($slug == "t") {
+              echo <<<EOL
+              <div class="col-md-4 col-sm-12 col-xs-12 offering $slug">
+                <div class="innerd">Kat. T<br>$cena zł/$hours h</div>
+              </div>
+              EOL;
+            }
+            else {
+              echo <<<EOL
+                <div class="col-md-4 col-sm-6 offering $slug">
+                  <div class="innerd">Kat. $nazwa<br>$cena zł/$hours h</div>
+                </div>
+            
+            EOL;
+            }
+            
+          }
+          
+          
+          ?>
+            
 
             <div class="col-xs-12 bonus text-center">Cena dodatkowych godzin jest uzgadniana osobiście</div>
 

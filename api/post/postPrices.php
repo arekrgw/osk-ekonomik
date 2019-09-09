@@ -1,6 +1,13 @@
 <?php
 
+require("../_verify.php");
+
+if(isset($_POST['verify']) && $_POST['verify'] === $verify) {
+
 require("../database.php");
+
+
+
 
 $query ='UPDATE ceny_kursow SET cena=:price, ilosc_godz=:hours WHERE nazwa=:kurs';
 $queryNoP ='UPDATE ceny_kursow SET ilosc_godz=:hours WHERE nazwa=:kurs';
@@ -129,4 +136,6 @@ if(isset($_POST['cat-t'])) {
     Db::fetch($query, array("price" => $catArray[0], "hours" => $catArray[1],"kurs" => "T" ));
   }
   echo json_encode($catArray);
+}
+
 }
